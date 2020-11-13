@@ -6,7 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Math/UnrealMathVectorCommon.h"
 
-enum Gears{NEUTRAL = 0, FIRST = 1, SECOND = 2};
+
 
 /*
 GEARS LOGIC
@@ -43,6 +43,10 @@ AMyPawn::AMyPawn()
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
+	
+	NeutralGear = 0;
+	FirstGear = 6000;
+	SecondGear = 9000;
 	CurrentGear = 0;
 
 	/*RollLeftValue = -2.0f;
@@ -71,30 +75,41 @@ void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-int AMyPawn::ShiftGear()
+int AMyPawn::ShiftGearUp()
 {
-	switch (CurrentGear)
+	if (CurrentGear == NeutralGear) 
 	{
-	case NEUTRAL:
-		CurrentGear = 0;
-		ShipSpeed = 0;
-		NextGear = 1;
-		break;
-	case FIRST:
-		CurrentGear = 1;
-		ShipSpeed = 1500;
-		NextGear = 2;
-		PreviewsGear = 0;
-		break;
-	case SECOND:
-		CurrentGear = 2;
-		ShipSpeed = 3000;
-		PreviewsGear = 1;
-		break;
-	default:
-		break;
+		CurrentGear = FirstGear;
+		return CurrentGear;
 	}
+	else if (CurrentGear == FirstGear) 
+	{
+		CurrentGear = SecondGear;
+		return CurrentGear;
+	}
+	else if (CurrentGear == SecondGear) 
+	{
+		return CurrentGear;
+	}
+	return CurrentGear;
+}
 
+int AMyPawn::ShiftGearDown()
+{
+	if (CurrentGear == NeutralGear)
+	{
+		return CurrentGear;
+	}
+	else if (CurrentGear == FirstGear)
+	{
+		CurrentGear = NeutralGear;
+		return CurrentGear;
+	}
+	else if (CurrentGear == SecondGear)
+	{
+		CurrentGear = FirstGear;
+		return CurrentGear;
+	}
 	return CurrentGear;
 }
 

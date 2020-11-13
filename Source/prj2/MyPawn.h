@@ -28,11 +28,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	int CurrentGear;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
+	int FirstGear;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
+	int SecondGear;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
+	int NeutralGear;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	int ShipSpeed;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	int NextGear;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	int PreviewsGear;
 
 	//rolling values
 	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
@@ -45,7 +47,9 @@ public:
 		float LerpRollValue;*/
 
 	UFUNCTION(BlueprintCallable)
-	int ShiftGear();
+	int ShiftGearUp();
+	UFUNCTION(BlueprintCallable)
+	int ShiftGearDown();
 
 	//rolling function
 	/*UFUNCTION(BlueprintCallable)
