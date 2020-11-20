@@ -44,10 +44,12 @@ AMyPawn::AMyPawn()
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 	
-	NeutralGear = 0;
-	FirstGear = 6000;
-	SecondGear = 9000;
-	CurrentGear = 0;
+	NeutralGear = .0f;
+	FirstGear = 6000.0f;
+	SecondGear = 9000.0f;
+	CruiseGear = 12000.0f;
+	CurrentGear = NeutralGear;
+
 
 	/*RollLeftValue = -2.0f;
 	RollRightValue = 2.0f;
@@ -75,7 +77,7 @@ void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-int AMyPawn::ShiftGearUp()
+float AMyPawn::ShiftGearUp()
 {
 	if (CurrentGear == NeutralGear) 
 	{
@@ -89,12 +91,17 @@ int AMyPawn::ShiftGearUp()
 	}
 	else if (CurrentGear == SecondGear) 
 	{
+		CurrentGear = CruiseGear;
+		return CurrentGear;
+	}
+	else if (CurrentGear == CruiseGear) 
+	{
 		return CurrentGear;
 	}
 	return CurrentGear;
 }
 
-int AMyPawn::ShiftGearDown()
+float AMyPawn::ShiftGearDown()
 {
 	if (CurrentGear == NeutralGear)
 	{
@@ -108,6 +115,11 @@ int AMyPawn::ShiftGearDown()
 	else if (CurrentGear == SecondGear)
 	{
 		CurrentGear = FirstGear;
+		return CurrentGear;
+	}
+	else if (CurrentGear == CruiseGear)
+	{
+		CurrentGear = SecondGear;
 		return CurrentGear;
 	}
 	return CurrentGear;

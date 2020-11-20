@@ -26,15 +26,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	int CurrentGear;
+	float CurrentGear;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	int FirstGear;
+	float FirstGear;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	int SecondGear;
+	float SecondGear;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	int NeutralGear;
+    float NeutralGear;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	int ShipSpeed;
+	float CruiseGear;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
+	float ShipSpeed;
 
 	//rolling values
 	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
@@ -47,9 +49,9 @@ public:
 		float LerpRollValue;*/
 
 	UFUNCTION(BlueprintCallable)
-	int ShiftGearUp();
+	float ShiftGearUp();
 	UFUNCTION(BlueprintCallable)
-	int ShiftGearDown();
+	float ShiftGearDown();
 
 	//rolling function
 	/*UFUNCTION(BlueprintCallable)
