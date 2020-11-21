@@ -11,6 +11,7 @@
 #include "Kismet/KismetMathLibrary.h"
 
 
+
 // Sets default values
 AMyPawn::AMyPawn()
 {
@@ -26,12 +27,28 @@ AMyPawn::AMyPawn()
 	
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("GameCamera"));
 	CameraComponent->SetupAttachment(SpringArmComponent, USpringArmComponent::SocketName);
+
+	Cannon1 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon1"));
+	Cannon1->SetupAttachment(StaticMeshComponent);
+	Cannon1->SetRelativeLocation(FVector(270.0f,-730.0f, 940.0f));
+
+	Cannon2 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon2"));
+	Cannon2->SetupAttachment(StaticMeshComponent);
+	Cannon2->SetRelativeLocation(FVector(470.0f,-730.0f, 940.0f));
+
+	Cannon3 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon3"));
+	Cannon3->SetupAttachment(StaticMeshComponent);
+	Cannon3->SetRelativeLocation(FVector(670.0f,-730.0f, 940.0f));
+
+	Cannon4 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon4"));
+	Cannon4->SetupAttachment(StaticMeshComponent);
+	Cannon4->SetRelativeLocation(FVector(870.0f,-730.0f, 940.0f));
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
-
+	
 	NeutralGear = .0f;
 	FirstGear = 6000.0f;
 	SecondGear = 9000.0f;
@@ -149,6 +166,21 @@ void AMyPawn::LockAim()
 	
 }
 
+void AMyPawn::DrawAimLines(AActor* Objective)
+{
+	FVector ObjectivePos = Objective->GetActorLocation();
+	FVector Cannon1Pos = Cannon1->GetComponentLocation();
+	FVector Cannon2Pos = Cannon2->GetComponentLocation();
+	FVector Cannon3Pos = Cannon3->GetComponentLocation();
+	FVector Cannon4Pos = Cannon4->GetComponentLocation();
+	
+	UWorld* const World = GetWorld();
+	DrawDebugLine(World, Cannon1Pos, ObjectivePos, FColor::Red, true);
+	DrawDebugLine(World, Cannon2Pos, ObjectivePos, FColor::Red, true);
+	DrawDebugLine(World, Cannon3Pos, ObjectivePos, FColor::Red, true);
+	DrawDebugLine(World, Cannon4Pos, ObjectivePos, FColor::Red, true);
+}
+
 
 void AMyPawn::Raycast()
 {
@@ -161,7 +193,7 @@ void AMyPawn::Raycast()
 	UWorld* const World = GetWorld();
 	if(World != nullptr)
 	{
-		DrawDebugLine(World, StartVector, EndVector, FColor::Red, true);
+		//DrawDebugLine(World, StartVector, EndVector, FColor::Red, true);
 		if(World->LineTraceSingleByChannel(HitResult, StartVector, EndVector, ECC_Visibility, CQP))
 		{
 			AActor* Targetable = HitResult.GetActor();
@@ -175,6 +207,7 @@ void AMyPawn::Raycast()
 						if(ITargetable)
 						{
 							ITargetable->Execute_OffFocused(FocusedActor);
+							FlushPersistentDebugLines(World);
 						}
 					}
 					IITargetable* ITargetable = Cast<IITargetable>(Targetable);
@@ -183,6 +216,7 @@ void AMyPawn::Raycast()
 						ITargetable->Execute_OnFocused(Targetable);
 					}
 					FocusedActor = Targetable;
+					DrawAimLines(FocusedActor);
 				}
 			}
 			else
@@ -193,6 +227,7 @@ void AMyPawn::Raycast()
 					if(ITargetable)
 					{
 						ITargetable->Execute_OffFocused(FocusedActor);
+						FlushPersistentDebugLines(World);
 					}
 				}
 				

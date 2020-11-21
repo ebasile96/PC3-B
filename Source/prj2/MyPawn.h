@@ -3,11 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/SpringArmComponent.h"
-
 #include "MyPawn.generated.h"
 
 UCLASS()
@@ -28,7 +26,14 @@ protected:
 	UCameraComponent* CameraComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* StaticMeshComponent;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon3;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon4;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -49,6 +54,8 @@ public:
 	float ShipSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	float RayLength = 5000.0f;
+	
+
 	UFUNCTION(BlueprintCallable)
 	float ShiftGearUp();
 	UFUNCTION(BlueprintCallable)
@@ -58,7 +65,8 @@ public:
     void LockAim();
 	UFUNCTION(BlueprintCallable)
     void CheckLock();
-
+	UFUNCTION(BlueprintCallable)
+	void DrawAimLines(AActor* Objective);
 	void Raycast();
 	
 	AActor* FocusedActor;
