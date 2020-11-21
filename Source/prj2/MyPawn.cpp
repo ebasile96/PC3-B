@@ -15,12 +15,24 @@
 // Sets default values
 AMyPawn::AMyPawn()
 {
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	
+	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
+	StaticMeshComponent->SetupAttachment(RootComponent);
+	
+	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraSpringArm"));
+	SpringArmComponent->SetupAttachment(StaticMeshComponent);
+	SpringArmComponent->SetRelativeLocationAndRotation(FVector(-174.0f, -290.0f, 1391.0f),FRotator(.0f, 339.0f, .0f));
+	SpringArmComponent->TargetArmLength = 562.0f;
+	
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("GameCamera"));
+	CameraComponent->SetupAttachment(SpringArmComponent, USpringArmComponent::SocketName);
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
-	
+
 	NeutralGear = .0f;
 	FirstGear = 6000.0f;
 	SecondGear = 9000.0f;
