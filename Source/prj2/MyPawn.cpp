@@ -2,14 +2,13 @@
 
 
 #include "MyPawn.h"
-
-
 #include "DrawDebugHelpers.h"
 #include "ITargetable.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Components/InputComponent.h"
-
-
+#include "Kismet/KismetMathLibrary.h"
 
 
 // Sets default values
@@ -54,7 +53,8 @@ void AMyPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	{
-		
+		Raycast();
+		//CheckLock();
 	}
 	
 
@@ -114,14 +114,35 @@ float AMyPawn::ShiftGearDown()
 	return CurrentGear;
 }
 
-void AMyPawn::LockAim()
+void AMyPawn::CheckLock()
 {
-	Raycast();
 	if(FocusedActor)
 	{
 		IITargetable* ITargetable = Cast<IITargetable>(FocusedActor);
 		if(ITargetable)
 		{
+			//prendo la posizione del target e la mia
+			FVector TargetLocation = FocusedActor->GetActorLocation();
+			FVector CurrentLocation = CameraComponent->GetComponentLocation();
+			//imposto la nuova rotazione della camera
+			FRotator CurrentRotation = UKismetMathLibrary::FindLookAtRotation(CurrentLocation, TargetLocation);
+			FRotator NewRotation = FMath::RInterpTo(CameraComponent->GetComponentRotation(), CurrentRotation, GetWorld()->GetDeltaSeconds(), 1.5f);
+			CameraComponent->SetRelativeRotation(NewRotation);
+		}
+	}
+}
+
+
+void AMyPawn::LockAim()
+{
+
+	if(FocusedActor)
+	{
+		Raycast();
+		IITargetable* ITargetable = Cast<IITargetable>(FocusedActor);
+		if(ITargetable)
+		{
+		
 			ITargetable->Execute_Interact(FocusedActor, this);
 		}
 	}
@@ -132,7 +153,6 @@ void AMyPawn::LockAim()
 void AMyPawn::Raycast()
 {
 	FHitResult HitResult;
-	//UCameraComponent* Camera;
 	FVector StartVector = CameraComponent->GetComponentLocation();
 	FVector ForwardVector = CameraComponent->GetForwardVector();
 	FVector EndVector = StartVector + (ForwardVector * RayLength);
@@ -142,7 +162,7 @@ void AMyPawn::Raycast()
 	if(World != nullptr)
 	{
 		DrawDebugLine(World, StartVector, EndVector, FColor::Red, true);
-		if(World->LineTraceSingleByChannel(HitResult, StartVector, EndVector, ECC_Visibility))
+		if(World->LineTraceSingleByChannel(HitResult, StartVector, EndVector, ECC_Visibility, CQP))
 		{
 			AActor* Targetable = HitResult.GetActor();
 			if(Targetable)
@@ -157,7 +177,7 @@ void AMyPawn::Raycast()
 							ITargetable->Execute_OffFocused(FocusedActor);
 						}
 					}
-					IITargetable* ITargetable = Cast<IITargetable>(FocusedActor);
+					IITargetable* ITargetable = Cast<IITargetable>(Targetable);
 					if(ITargetable)
 					{
 						ITargetable->Execute_OnFocused(Targetable);

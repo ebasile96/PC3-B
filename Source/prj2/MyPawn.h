@@ -56,6 +56,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
     void LockAim();
+	UFUNCTION(BlueprintCallable)
+    void CheckLock();
 
 	void Raycast();
 	

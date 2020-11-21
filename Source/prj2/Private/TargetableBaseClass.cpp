@@ -40,3 +40,9 @@ void ATargetableBaseClass::Interact_Implementation(APawn* Caller)
 {
 	
 }
+
+
+
+
+
+

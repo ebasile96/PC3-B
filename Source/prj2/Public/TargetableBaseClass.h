@@ -27,10 +27,12 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Targetable")
     void OnFocused();
-	virtual  void OnFocused_Implementation();
+	virtual void OnFocused_Implementation();
+	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Targetable")
     void OffFocused();
 	virtual void OffFocused_Implementation();
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Targetable")
     void Interact(APawn* Caller);
 	virtual void Interact_Implementation(APawn* Caller);
