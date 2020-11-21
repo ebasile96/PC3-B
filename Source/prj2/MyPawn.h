@@ -3,7 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
+#include "GameFramework/SpringArmComponent.h"
+
 #include "MyPawn.generated.h"
 
 UCLASS()
@@ -18,6 +22,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	USpringArmComponent* SpringArmComponent;
+	UCameraComponent* CameraComponent;
 
 public:
 	// Called every frame
@@ -37,24 +44,19 @@ public:
 	float CruiseGear;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	float ShipSpeed;
-
-	//rolling values
-	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-		float RollLeftValue;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-		float RollRightValue;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-		float CurrentRollValue;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-		float LerpRollValue;*/
-
+	float RayLength = 5000.0f;
 	UFUNCTION(BlueprintCallable)
 	float ShiftGearUp();
 	UFUNCTION(BlueprintCallable)
 	float ShiftGearDown();
+	
+	UFUNCTION(BlueprintCallable)
+    void LockAim();
 
-	//rolling function
-	/*UFUNCTION(BlueprintCallable)
-	float ShipRoller(float _lerpValue);*/
+	void Raycast();
+	
+	AActor* FocusedActor;
+
 }
 ;

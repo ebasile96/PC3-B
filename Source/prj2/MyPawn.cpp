@@ -2,38 +2,15 @@
 
 
 #include "MyPawn.h"
+
+
+#include "DrawDebugHelpers.h"
+#include "ITargetable.h"
+#include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
-#include "Components/StaticMeshComponent.h"
-#include "Math/UnrealMathVectorCommon.h"
 
 
 
-/*
-GEARS LOGIC
-
-- struct dati
-
-GearUp(dati);
-GearDown(dati);
-*/
-/*
-ROLLING LOGIC
-leftvalue= 0;
-rightvalue = 1;
-NeutralValue = 0.5;
-current = 0; (default)
-
-//Rolling(float _neutral, float _left, float _right)
-Press left?
-Lerp(_neutral, left, t) = current;
-release?
-Lerp(left, neutral, t) = current;
-
-Press right?
-Lerp(_neutral, right, t) = current;
-release?
-Lerp(right, neutral, t) = current;
-*/
 
 // Sets default values
 AMyPawn::AMyPawn()
@@ -50,10 +27,8 @@ AMyPawn::AMyPawn()
 	CruiseGear = 12000.0f;
 	CurrentGear = NeutralGear;
 
-
-	/*RollLeftValue = -2.0f;
-	RollRightValue = 2.0f;
-	LerpRollValue = 0.5f;*/
+	
+	
 }
 
 // Called when the game starts or when spawned
@@ -67,7 +42,9 @@ void AMyPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	{
+		
 	}
+	
 
 }
 
@@ -125,14 +102,75 @@ float AMyPawn::ShiftGearDown()
 	return CurrentGear;
 }
 
-//float AMyPawn::ShipRoller( float _lerpValue) 
-//{
-//	float _currentValue;
-//	_currentValue = FMath::Lerp(RollLeftValue, RollRightValue, _lerpValue);
-//	CurrentRollValue = FMath::Clamp(_currentValue, .0f, 1.0f);
-//
-//	return CurrentRollValue;
-//}
+void AMyPawn::LockAim()
+{
+	Raycast();
+	if(FocusedActor)
+	{
+		IITargetable* ITargetable = Cast<IITargetable>(FocusedActor);
+		if(ITargetable)
+		{
+			ITargetable->Execute_Interact(FocusedActor, this);
+		}
+	}
+	
+}
+
+
+void AMyPawn::Raycast()
+{
+	FHitResult HitResult;
+	//UCameraComponent* Camera;
+	FVector StartVector = CameraComponent->GetComponentLocation();
+	FVector ForwardVector = CameraComponent->GetForwardVector();
+	FVector EndVector = StartVector + (ForwardVector * RayLength);
+	FCollisionQueryParams CQP;
+	CQP.AddIgnoredActor(this);
+	UWorld* const World = GetWorld();
+	if(World != nullptr)
+	{
+		DrawDebugLine(World, StartVector, EndVector, FColor::Red, true);
+		if(World->LineTraceSingleByChannel(HitResult, StartVector, EndVector, ECC_Visibility))
+		{
+			AActor* Targetable = HitResult.GetActor();
+			if(Targetable)
+			{
+				if(Targetable != FocusedActor)
+				{
+					if(FocusedActor)
+					{
+						IITargetable* ITargetable = Cast<IITargetable>(FocusedActor);
+						if(ITargetable)
+						{
+							ITargetable->Execute_OffFocused(FocusedActor);
+						}
+					}
+					IITargetable* ITargetable = Cast<IITargetable>(FocusedActor);
+					if(ITargetable)
+					{
+						ITargetable->Execute_OnFocused(Targetable);
+					}
+					FocusedActor = Targetable;
+				}
+			}
+			else
+			{
+				if (FocusedActor)
+				{
+					IITargetable* ITargetable = Cast<IITargetable>(FocusedActor);
+					if(ITargetable)
+					{
+						ITargetable->Execute_OffFocused(FocusedActor);
+					}
+				}
+				
+				FocusedActor = nullptr;
+			}
+		}
+		
+	}
+}
+
 
 
 
