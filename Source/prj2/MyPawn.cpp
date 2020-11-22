@@ -2,6 +2,9 @@
 
 
 #include "MyPawn.h"
+
+#include <string>
+
 #include "DrawDebugHelpers.h"
 #include "ITargetable.h"
 #include "Camera/CameraComponent.h"
@@ -55,7 +58,7 @@ AMyPawn::AMyPawn()
 	CruiseGear = 12000.0f;
 	CurrentGear = NeutralGear;
 
-	
+	ThresholdDistance = 5000.0f;
 	
 }
 
@@ -71,7 +74,7 @@ void AMyPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	{
 		Raycast();
-		//CheckLock();
+		
 	}
 	
 
@@ -165,6 +168,49 @@ void AMyPawn::LockAim()
 	}
 	
 }
+
+float AMyPawn::LookingDirection()
+{
+	FVector RightVector = GetActorRightVector();
+	FVector CameraForward = CameraComponent->GetForwardVector();
+	float DotProd = FVector::DotProduct(RightVector,CameraForward);
+
+	/*if(DotProd > 0.0f)
+	{
+		//azione se sto guardando a destra
+		GEngine->AddOnScreenDebugMessage(-1,15.0f,FColor::Yellow, TEXT("WATCHING RIGHT"));
+	}
+	else if(DotProd < 0.0f)
+	{
+		//azione se sto guardando a sinistra
+		GEngine->AddOnScreenDebugMessage(-1,15.0f,FColor::Yellow, TEXT("WATCHING LEFT"));
+	}*/
+	return DotProd;
+}
+
+float AMyPawn::CheckTargetDistance()
+{
+	FVector SelfPos = GetActorLocation();
+	FVector TargetLoc;
+	if(FocusedActor)
+	{
+		TargetLoc = FocusedActor->GetActorLocation();
+		float Distance = FVector::Distance(TargetLoc,SelfPos);
+		FString DistString = FString::SanitizeFloat(Distance);
+		if(Distance <= ThresholdDistance)
+		{
+			GEngine->AddOnScreenDebugMessage(-1 , 2.0f, FColor::Green, DistString);
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1 , 2.0f, FColor::Red, DistString);
+		}
+		return Distance;
+	}
+	return .0f;
+}
+
+
 
 void AMyPawn::DrawAimLines(AActor* Objective)
 {

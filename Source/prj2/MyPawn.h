@@ -53,7 +53,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	float ShipSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
-	float RayLength = 5000.0f;
+	float RayLength = 15000.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
+	float ThresholdDistance;
 	
 
 	UFUNCTION(BlueprintCallable)
@@ -67,6 +69,10 @@ public:
     void CheckLock();
 	UFUNCTION(BlueprintCallable)
 	void DrawAimLines(AActor* Objective);
+	UFUNCTION(BlueprintCallable)
+	float LookingDirection();
+	UFUNCTION(BlueprintCallable)
+	float CheckTargetDistance();
 	void Raycast();
 	
 	AActor* FocusedActor;

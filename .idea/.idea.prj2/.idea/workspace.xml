@@ -7,7 +7,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8a89814a-665b-4ddd-86e8-15483e7f094c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.prj2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.prj2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_Targetable.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_Targetable.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/prj2/MyPawn.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/prj2/MyPawn.h" afterDir="false" />
     </list>
@@ -272,7 +274,8 @@
       <workItem from="1605290132373" duration="319000" />
       <workItem from="1605296450770" duration="821000" />
       <workItem from="1605880105293" duration="2273000" />
-      <workItem from="1605969068524" duration="23907000" />
+      <workItem from="1605969068524" duration="24024000" />
+      <workItem from="1606053508758" duration="5228000" />
     </task>
     <servers />
   </component>
