@@ -207,7 +207,7 @@ float AMyPawn::CheckTargetDistance()
 		}
 		return Distance;
 	}
-	return .0f;
+	return 9999.9f;
 }
 
 
