@@ -31,6 +31,7 @@
           <e p="MyPawn.cpp" t="Include" />
           <e p="MyPawn.h" t="Include" />
           <e p="Private" t="Include">
+            <e p="CannonBall.cpp" t="Include" />
             <e p="TargetableBaseClass.cpp" t="Include" />
           </e>
           <e p="prj2.Build.cs" t="Include" />
@@ -39,6 +40,7 @@
           <e p="prj2GameModeBase.cpp" t="Include" />
           <e p="prj2GameModeBase.h" t="Include" />
           <e p="Public" t="Include">
+            <e p="CannonBall.h" t="Include" />
             <e p="TargetableBaseClass.h" t="Include" />
           </e>
         </e>

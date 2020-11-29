@@ -7,6 +7,7 @@
 
 #include "DrawDebugHelpers.h"
 #include "ITargetable.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -46,6 +47,22 @@ AMyPawn::AMyPawn()
 	Cannon4 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon4"));
 	Cannon4->SetupAttachment(StaticMeshComponent);
 	Cannon4->SetRelativeLocation(FVector(870.0f,-730.0f, 940.0f));
+
+	Cannon5 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon5"));
+	Cannon5->SetupAttachment(StaticMeshComponent);
+	Cannon5->SetRelativeLocation(FVector(270.0f,120.0f, 940.0f));
+
+	Cannon6 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon6"));
+	Cannon6->SetupAttachment(StaticMeshComponent);
+	Cannon6->SetRelativeLocation(FVector(470.0f,120.0f, 940.0f));
+
+	Cannon7 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon7"));
+	Cannon7->SetupAttachment(StaticMeshComponent);
+	Cannon7->SetRelativeLocation(FVector(670.0f,120.0f, 940.0f));
+
+	Cannon8 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon8"));
+	Cannon8->SetupAttachment(StaticMeshComponent);
+	Cannon8->SetRelativeLocation(FVector(870.0f,120.0f, 940.0f));
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -66,6 +83,16 @@ AMyPawn::AMyPawn()
 void AMyPawn::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CannonsLeft.Add(Cannon1);
+	CannonsLeft.Add(Cannon2);
+	CannonsLeft.Add(Cannon3);
+	CannonsLeft.Add(Cannon4);
+
+	CannonsRight.Add(Cannon5);
+	CannonsRight.Add(Cannon6);
+	CannonsRight.Add(Cannon7);
+	CannonsRight.Add(Cannon8);
 }
 
 // Called every frame
@@ -242,6 +269,7 @@ void AMyPawn::Raycast()
 		//DrawDebugLine(World, StartVector, EndVector, FColor::Red, true);
 		if(World->LineTraceSingleByChannel(HitResult, StartVector, EndVector, ECC_Visibility, CQP))
 		{
+			
 			AActor* Targetable = HitResult.GetActor();
 			if(Targetable)
 			{
@@ -283,6 +311,61 @@ void AMyPawn::Raycast()
 		
 	}
 }
+
+FRotator AMyPawn::Fire(TArray<USceneComponent*> Cannons, FVector& cannonLoc)
+{
+	FHitResult HitResult;
+	FVector StartVector = CameraComponent->GetComponentLocation();
+	FVector ForwardVector = CameraComponent->GetForwardVector();
+	FVector EndVector = StartVector + (ForwardVector * RayLength);
+	bool HitValue;
+	FRotator TargetLocation;
+	FCollisionQueryParams CQP;
+	CQP.AddIgnoredActor(this);
+	UWorld* const World = GetWorld();
+
+	if(World != nullptr)
+	{
+		if(World->LineTraceSingleByChannel(HitResult, StartVector, EndVector, ECC_Visibility, CQP))
+		{
+			HitValue = true;
+			for (USceneComponent* Cannon : Cannons)
+			{
+				FVector selectedVector = UKismetMathLibrary::SelectVector(HitResult.Location, HitResult.TraceEnd, HitValue);
+				FVector cannonLocation = Cannon->GetComponentLocation();
+				TargetLocation = UKismetMathLibrary::FindLookAtRotation(cannonLocation,selectedVector);
+				cannonLoc = cannonLocation;
+			}
+		
+		}
+		else
+		{
+			HitValue = false;
+			for (USceneComponent* Cannon : Cannons)
+			{
+				FVector selectedVector = UKismetMathLibrary::SelectVector(HitResult.Location, HitResult.TraceEnd, HitValue);
+				FVector cannonLocation = Cannon->GetComponentLocation();
+				TargetLocation = UKismetMathLibrary::FindLookAtRotation(cannonLocation,selectedVector);
+				cannonLoc = cannonLocation;
+			}
+		
+		}
+		
+		
+	}
+	return TargetLocation;
+}
+
+TArray<USceneComponent*> AMyPawn::SetCannonsToShoot(TArray<USceneComponent*> cannonArrayInput)
+{
+	TArray<USceneComponent*> newArr;
+
+	newArr = cannonArrayInput;
+
+	return newArr;
+}
+
+
 
 
 

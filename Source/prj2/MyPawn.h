@@ -3,6 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include <array>
+
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -34,6 +37,18 @@ protected:
 	USceneComponent* Cannon3;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	USceneComponent* Cannon4;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon6;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon7;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USceneComponent* Cannon8;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<USceneComponent*> CannonsLeft;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<USceneComponent*> CannonsRight;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -56,6 +71,7 @@ public:
 	float RayLength = 15000.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	float ThresholdDistance;
+
 	
 
 	UFUNCTION(BlueprintCallable)
@@ -73,7 +89,12 @@ public:
 	float LookingDirection();
 	UFUNCTION(BlueprintCallable)
 	float CheckTargetDistance();
+	UFUNCTION(BlueprintCallable)
+	TArray<USceneComponent*> SetCannonsToShoot(TArray<USceneComponent*> cannonArrayInput);
 	void Raycast();
+
+	UFUNCTION(BlueprintCallable)
+	FRotator Fire(TArray<USceneComponent*> Cannons, FVector& cannonLoc);
 	
 	AActor* FocusedActor;
 
