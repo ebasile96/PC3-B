@@ -100,7 +100,7 @@ void AMyPawn::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	{
-		Raycast();
+		//Raycast();
 		
 	}
 	
