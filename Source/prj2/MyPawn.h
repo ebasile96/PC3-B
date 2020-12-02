@@ -91,6 +91,7 @@ public:
 	float CheckTargetDistance();
 	UFUNCTION(BlueprintCallable)
 	TArray<USceneComponent*> SetCannonsToShoot(TArray<USceneComponent*> cannonArrayInput);
+	UFUNCTION(BlueprintCallable)
 	void Raycast();
 
 	UFUNCTION(BlueprintCallable)
