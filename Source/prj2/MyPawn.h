@@ -96,6 +96,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FRotator Fire(TArray<USceneComponent*> Cannons, FVector& cannonLoc);
+
+	
 	
 	AActor* FocusedActor;
 
