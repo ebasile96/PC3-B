@@ -118,28 +118,28 @@ float AMyPawn::ShiftGearUp()
 	if (CurrentGear == NeutralGear) 
 	{
 		CurrentGear = FirstGear;
-
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("FirstGear"));
+		CurrentGearName = "FirstGear";
+		
 		return CurrentGear;
 	}
 	else if (CurrentGear == FirstGear) 
 	{
 		CurrentGear = SecondGear;
-
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("SecondGear"));
+		CurrentGearName = "SecondGear";
+		
 		return CurrentGear;
 	}
 	else if (CurrentGear == SecondGear) 
 	{
 		CurrentGear = CruiseGear;
-
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("CruiseGear"));
+		CurrentGearName = "CruiseGear";
+		
 		return CurrentGear;
 	}
 	else if (CurrentGear == CruiseGear) 
 	{
-
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("CruiseGear"));
+		CurrentGearName = "CruiseGear";
+		
 		return CurrentGear;
 	}
 
@@ -152,25 +152,29 @@ float AMyPawn::ShiftGearDown()
 {
 	if (CurrentGear == NeutralGear)
 	{
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("NeutralGear"));
+		CurrentGearName = "NeutralGear";
+		
 		return CurrentGear;
 	}
 	else if (CurrentGear == FirstGear)
 	{
 		CurrentGear = NeutralGear;
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("NeutralGear"));
+		CurrentGearName = "NeutralGear";
+		
 		return CurrentGear;
 	}
 	else if (CurrentGear == SecondGear)
 	{
 		CurrentGear = FirstGear;
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("FirstGear"));
+		CurrentGearName = "FirstGear";
+		
 		return CurrentGear;
 	}
 	else if (CurrentGear == CruiseGear)
 	{
 		CurrentGear = SecondGear;
-		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("SecondGear"));
+		CurrentGearName = "SecondGear";
+		
 		return CurrentGear;
 	}
 	return CurrentGear;

@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 
 #include <array>
-
+#include <string>
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -71,6 +71,8 @@ public:
 	float RayLength = 15000.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	float ThresholdDistance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
+	FString CurrentGearName = "";
 
 	
 
