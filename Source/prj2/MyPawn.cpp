@@ -3,7 +3,6 @@
 
 #include "MyPawn.h"
 
-#include <string>
 
 #include "DrawDebugHelpers.h"
 #include "ITargetable.h"
@@ -115,47 +114,63 @@ void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 float AMyPawn::ShiftGearUp()
 {
+	
 	if (CurrentGear == NeutralGear) 
 	{
 		CurrentGear = FirstGear;
+
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("FirstGear"));
 		return CurrentGear;
 	}
 	else if (CurrentGear == FirstGear) 
 	{
 		CurrentGear = SecondGear;
+
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("SecondGear"));
 		return CurrentGear;
 	}
 	else if (CurrentGear == SecondGear) 
 	{
 		CurrentGear = CruiseGear;
+
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("CruiseGear"));
 		return CurrentGear;
 	}
 	else if (CurrentGear == CruiseGear) 
 	{
+
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("CruiseGear"));
 		return CurrentGear;
 	}
+
+	
 	return CurrentGear;
+	
 }
 
 float AMyPawn::ShiftGearDown()
 {
 	if (CurrentGear == NeutralGear)
 	{
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("NeutralGear"));
 		return CurrentGear;
 	}
 	else if (CurrentGear == FirstGear)
 	{
 		CurrentGear = NeutralGear;
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("NeutralGear"));
 		return CurrentGear;
 	}
 	else if (CurrentGear == SecondGear)
 	{
 		CurrentGear = FirstGear;
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("FirstGear"));
 		return CurrentGear;
 	}
 	else if (CurrentGear == CruiseGear)
 	{
 		CurrentGear = SecondGear;
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Yellow, TEXT("SecondGear"));
 		return CurrentGear;
 	}
 	return CurrentGear;

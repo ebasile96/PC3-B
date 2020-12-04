@@ -6,7 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a89814a-665b-4ddd-86e8-15483e7f094c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Source/prj2/Private/CannonBall.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/prj2/Private/CannonBall.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.prj2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.prj2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +30,8 @@
         <option value="$PROJECT_DIR$/Source/prj2/Private/TargetableBaseClass.cpp" />
         <option value="$PROJECT_DIR$/Source/prj2/Public/CannonBall.h" />
         <option value="$PROJECT_DIR$/Source/prj2/MyPawn.h" />
-        <option value="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" />
         <option value="$PROJECT_DIR$/Source/prj2/Private/CannonBall.cpp" />
+        <option value="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" />
       </list>
     </option>
   </component>
@@ -280,6 +283,7 @@
       <workItem from="1606679079425" duration="617000" />
       <workItem from="1606930245819" duration="795000" />
       <workItem from="1607014223044" duration="1734000" />
+      <workItem from="1607113235754" duration="1473000" />
     </task>
     <servers />
   </component>
