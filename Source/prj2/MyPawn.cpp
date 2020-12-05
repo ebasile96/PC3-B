@@ -3,7 +3,7 @@
 
 #include "MyPawn.h"
 
-
+#include "CableComponent.h"
 #include "DrawDebugHelpers.h"
 #include "ITargetable.h"
 #include "BehaviorTree/BehaviorTreeTypes.h"
@@ -62,6 +62,21 @@ AMyPawn::AMyPawn()
 	Cannon8 = CreateDefaultSubobject<USceneComponent>(TEXT("Cannon8"));
 	Cannon8->SetupAttachment(StaticMeshComponent);
 	Cannon8->SetRelativeLocation(FVector(870.0f,120.0f, 940.0f));
+
+	HarpoonCannon = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("HarpoonCannon"));
+	HarpoonCannon->SetupAttachment(StaticMeshComponent);
+	HarpoonCannon->SetRelativeLocation(FVector(2170.0f, -10.0f, 940.0f));
+
+	HarpoonProjectile = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("HarpoonProjectile"));
+	HarpoonProjectile->SetupAttachment(HarpoonCannon);
+	HarpoonProjectile->SetRelativeLocation(FVector(-60.0f, 0.0f, 0.0f));
+
+	Rope = CreateDefaultSubobject<UCableComponent>(TEXT("Rope"));
+	Rope->SetupAttachment(HarpoonCannon);
+	Rope->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
+	//Rope->SetAttachEndTo(this, "HarpoonProjectile", "RopeAttachment");
+
+	
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 

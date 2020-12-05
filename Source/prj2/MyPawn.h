@@ -49,6 +49,13 @@ protected:
 	TArray<USceneComponent*> CannonsLeft;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<USceneComponent*> CannonsRight;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMeshComponent* HarpoonCannon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMeshComponent* HarpoonProjectile;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UCableComponent* Rope;
+	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
