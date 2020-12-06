@@ -6,7 +6,6 @@
 #include "CableComponent.h"
 #include "DrawDebugHelpers.h"
 #include "ITargetable.h"
-#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/StaticMeshComponent.h"
