@@ -16,7 +16,7 @@
 	"Plugins": [
 		{
 			"Name": "VolumetricClouds",
-			"Enabled": false
+			"Enabled": true
 		}
 	]
 }
