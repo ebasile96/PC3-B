@@ -6,12 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a89814a-665b-4ddd-86e8-15483e7f094c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.prj2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.prj2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_CannonBall.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_CannonBall.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AIBalena.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AIBalena.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/prj2/MyPawn.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prj2.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/prj2.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
