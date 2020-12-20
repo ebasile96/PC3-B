@@ -6,7 +6,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a89814a-665b-4ddd-86e8-15483e7f094c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/3DM/3DM001_ship.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/3DM/3DM001_ship.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_HarpoonProjectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_HarpoonProjectile.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_Targetable.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_Targetable.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Ship_Blueprint.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/movementTestMap.umap" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,6 +289,7 @@
       <workItem from="1607178938658" duration="558000" />
       <workItem from="1607179718023" duration="2496000" />
       <workItem from="1607265668825" duration="835000" />
+      <workItem from="1608477861625" duration="57000" />
     </task>
     <servers />
   </component>
