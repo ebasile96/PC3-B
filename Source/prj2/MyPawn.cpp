@@ -3,6 +3,9 @@
 
 #include "MyPawn.h"
 
+
+
+#include "TimerManager.h"
 #include "CableComponent.h"
 #include "DrawDebugHelpers.h"
 #include "ITargetable.h"
@@ -11,7 +14,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/InputComponent.h"
 #include "Kismet/KismetMathLibrary.h"
-
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -106,6 +109,26 @@ void AMyPawn::BeginPlay()
 	CannonsRight.Add(Cannon6);
 	CannonsRight.Add(Cannon7);
 	CannonsRight.Add(Cannon8);
+
+	GetWhaleReference();
+
+	FTimerHandle Handle;
+	FTimerHandle Handle2;
+	
+	
+	/*GetWorld()->GetTimerManager().SetTimer(Handle2, [this]() {CurrentDistance = CheckWhaleDistance();}, 2.0f, true, 0.5f);
+	GetWorld()->GetTimerManager().SetTimer(Handle, [this]()
+    {
+        NextDistance = CheckWhaleDistance();
+    if(CurrentDistance > NextDistance)
+    {
+        IsShipApproachingBool = true;
+    }
+    else if (CurrentDistance < NextDistance)
+    {
+        IsShipApproachingBool = false;
+    }
+    }, 2.0f, true, 1.0f );*/
 }
 
 // Called every frame
@@ -114,6 +137,7 @@ void AMyPawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	{
 		//Raycast();
+		CheckWhaleDistance();
 		
 	}
 	
@@ -397,6 +421,85 @@ TArray<USceneComponent*> AMyPawn::SetCannonsToShoot(TArray<USceneComponent*> can
 
 	return newArr;
 }
+
+float AMyPawn::CheckWhaleDistance()
+{
+	float distance;
+	FVector ShipCurrentLocation = GetActorLocation();
+	FVector WhaleCurrentLocation;
+
+	for (AActor* Whale : WhaleReference)
+	{
+		WhaleCurrentLocation = Whale->GetActorLocation();
+		distance = FVector::Distance(ShipCurrentLocation, WhaleCurrentLocation);
+	}
+	return distance;
+}
+
+float AMyPawn::RopeTensionSetter(float multiplier, float _ropeTension)
+{
+
+	float newTension;
+	newTension = (_ropeTension + multiplier); 
+	return newTension;
+}
+
+void AMyPawn::GetWhaleReference()
+{
+	TSubclassOf<AActor> ClassToFind;
+	TArray<AActor*> ActorFound;
+	UWorld* World = GetWorld();
+	
+	UGameplayStatics::GetAllActorsOfClassWithTag(World,ClassToFind, "Whale", ActorFound);
+	WhaleReference = ActorFound;
+
+}
+
+/*void AMyPawn::IsShipApproaching()
+{
+	NextDistance = CheckWhaleDistance();
+	if(CurrentDistance > NextDistance)
+	{
+		IsShipApproachingBool = true;
+	}
+	else if (CurrentDistance < NextDistance)
+	{
+		IsShipApproachingBool = false;
+	}
+}*/
+
+void AMyPawn::SetThresholdMultiplier()
+{
+	
+	if(IsShipApproachingBool == true)
+	{
+		if(RopeTension > 20)
+		{
+			ThresholdMultiplier = -2.0f;
+		}
+		else if (RopeTension <= 20)
+		{
+			ThresholdMultiplier = -5.0f;
+		}
+	}
+	else if(IsShipApproachingBool == false)
+	{
+		if(RopeTension < 80)
+		{
+			ThresholdMultiplier = 2.0f;
+		}
+		else if (RopeTension >= 80)
+		{
+			ThresholdMultiplier = 5.0f;
+		}
+	}
+}
+
+
+
+
+
+
 
 
 

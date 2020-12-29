@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 
-#include <array>
-#include <string>
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -56,6 +54,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCableComponent* Rope;
 	
+	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -80,7 +79,22 @@ public:
 	float ThresholdDistance;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ship")
 	FString CurrentGearName = "";
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Threshold")
+	float RopeTension = 49.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Threshold")
+	float WhaleDistance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Threshold")
+	TArray<AActor*> WhaleReference;
 
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Threshold")
+	float CurrentDistance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Threshold")
+	float NextDistance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Threshold")
+	float ThresholdMultiplier;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Threshold")
+	bool IsShipApproachingBool;
 	
 
 	UFUNCTION(BlueprintCallable)
@@ -105,10 +119,20 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FRotator Fire(TArray<USceneComponent*> Cannons, FVector& cannonLoc);
-
+	UFUNCTION(BlueprintCallable)
+	float CheckWhaleDistance();
+	UFUNCTION(BlueprintCallable)
+	float RopeTensionSetter(float multiplier, float _ropeTension);
+	UFUNCTION(BlueprintCallable)
+	void GetWhaleReference();
+	/*UFUNCTION(BlueprintCallable)
+	void IsShipApproaching();*/
+	UFUNCTION(BlueprintCallable)
+	void SetThresholdMultiplier();
 	
 	
-	AActor* FocusedActor;
+	
+	 AActor* FocusedActor;
 
 }
 ;
