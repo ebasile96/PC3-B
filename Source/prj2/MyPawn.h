@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
+#include "Components/BoxComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -53,6 +53,8 @@ protected:
 	UStaticMeshComponent* HarpoonProjectile;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	class UCableComponent* Rope;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UBoxComponent* BoxCollider;
 	
 	
 public:

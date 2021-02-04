@@ -15,12 +15,15 @@
 #include "Components/InputComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Components/BoxComponent.h"
 
 
 // Sets default values
 AMyPawn::AMyPawn()
 {
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	BoxCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("RootComponent"));
+	RootComponent = BoxCollider;
+	
 	
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMeshComponent->SetupAttachment(RootComponent);
