@@ -17,6 +17,10 @@
 		{
 			"Name": "VolumetricClouds",
 			"Enabled": false
+		},
+		{
+			"Name": "Volumetrics",
+			"Enabled": true
 		}
 	]
 }
